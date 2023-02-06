@@ -1,5 +1,7 @@
 package jpabucket.bucketlist.domain.item;
 
+import static javax.persistence.FetchType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public abstract class Item {
 	private String goal;
 	private int heart;
 
-	@OneToOne(mappedBy = "items")
+	@OneToOne(mappedBy = "items", fetch = LAZY)
 	private Register register;
 
 	@ManyToMany(mappedBy = "items")

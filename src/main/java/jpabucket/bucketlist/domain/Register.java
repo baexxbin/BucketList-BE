@@ -1,7 +1,10 @@
 package jpabucket.bucketlist.domain;
 
+import static javax.persistence.FetchType.*;
+
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,17 +30,30 @@ public class Register {
 	@Column(name = "register_id")
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-	@OneToOne
+	@OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "item_id")
-	private Item items;
+	private Item item;
 
 	private LocalDateTime registrationDate;
 	private LocalDateTime targetDate;
 
 	@Enumerated(EnumType.STRING)
 	private RegisteredStatus status;
+
+	//==연관관계 메서드==//
+	public void setMember(Member member) {
+		this.member = member;
+		member.getRegisters().add(this);
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+		item.setRegister(this);
+
+	}
+
 }
