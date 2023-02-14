@@ -35,7 +35,7 @@ public abstract class Item {
 	private String goal;
 	private int heart;
 
-	@OneToOne(mappedBy = "items", fetch = LAZY)
+	@OneToOne(mappedBy = "item", fetch = LAZY)
 	private Register register;
 
 	@ManyToMany(mappedBy = "items")
