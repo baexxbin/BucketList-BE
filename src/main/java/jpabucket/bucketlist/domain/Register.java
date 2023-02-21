@@ -56,4 +56,22 @@ public class Register {
 
 	}
 
+	//==생성 메서드==//
+	public static Register createRegister(Member member, Item item) {
+		Register register = new Register();
+		register.setMember(member);
+		register.setItem(item);
+
+		register.setStatus(RegisteredStatus.REGISTRATION);
+		register.setRegistrationDate(LocalDateTime.now());
+		return register;
+	}
+
+	//==비즈니스 로직==//
+	/*
+	 * 등록 취소
+	 */
+
+	//==조회 로직==//
+
 }
