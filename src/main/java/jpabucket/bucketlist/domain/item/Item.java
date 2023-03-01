@@ -17,7 +17,9 @@ import javax.persistence.OneToOne;
 
 import jpabucket.bucketlist.domain.Category;
 import jpabucket.bucketlist.domain.Register;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -25,6 +27,7 @@ import lombok.Setter;
 @DiscriminatorColumn(name = "dtype")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Item {
 
 	@Id
