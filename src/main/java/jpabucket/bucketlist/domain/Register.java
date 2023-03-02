@@ -69,8 +69,13 @@ public class Register {
 
 	//==비즈니스 로직==//
 	/*
-	 * 등록 취소
+	 * 등록 상태 변경
 	 */
+	public void changeStatus() {
+		if (status == RegisteredStatus.REGISTRATION) {
+			this.setStatus(RegisteredStatus.ACHIEVEMENT);
+		}
+	}
 
 	//==조회 로직==//
 
