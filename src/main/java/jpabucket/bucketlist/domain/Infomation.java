@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class Infomation {
 
+	private String nickname;
 	private String password;
 	private String email;
 
@@ -15,7 +16,8 @@ public class Infomation {
 		
 	}
 
-	public Infomation(String password, String email) {
+	public Infomation(String nickname ,String password, String email) {
+		this.nickname = nickname;
 		this.password = password;
 		this.email = email;
 	}
