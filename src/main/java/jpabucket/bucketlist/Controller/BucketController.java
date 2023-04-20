@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,5 +35,13 @@ public class BucketController {
 
         itemService.saveItem(toDo);
         return "redirect:/";
+    }
+
+    @GetMapping("/buckets")
+    public String list(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "buckets/bucketList";
+
     }
 }
