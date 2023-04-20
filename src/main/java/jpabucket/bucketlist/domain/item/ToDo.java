@@ -12,7 +12,7 @@ import lombok.Setter;
 @DiscriminatorValue("D")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ToDo extends Item {
 	private String way;
 }
