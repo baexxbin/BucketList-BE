@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jpabucket.bucketlist.domain.Member;
 import jpabucket.bucketlist.domain.Register;
 import jpabucket.bucketlist.domain.item.Item;
-import jpabucket.bucketlist.domain.item.ItemFactory;
+//import jpabucket.bucketlist.domain.item.ItemFactory;
 import jpabucket.bucketlist.domain.item.ItemType;
 import jpabucket.bucketlist.repository.ItemRepository;
 import jpabucket.bucketlist.repository.MemberRepository;
@@ -25,14 +25,30 @@ public class RegisterService {
 	/*
 	 * 등록
 	 */
+//	@Transactional
+//	public Long register(Long memberId, ItemType type, String goal, String detail, int price) {
+//
+//		// 엔티티 조회
+//		Member member = memberRepository.findOne(memberId);
+//
+//		// 등록 아티템 생성 (아이템 생성매소드 사용)
+//		Item item = ItemFactory.createItem(type, goal, detail, price);
+//
+//		// 등록 생성
+//		Register register = Register.createRegister(member, item);
+//
+//		// 등록 저장
+//		registerRepository.save(register);
+//
+//		// 등록 식별자 값 반환
+//		return register.getId();
+//	}
+
 	@Transactional
-	public Long register(Long memberId, ItemType type, String goal, String detail, int price) {
+	public Long register(Long memberId, Item item) {
 
 		// 엔티티 조회
 		Member member = memberRepository.findOne(memberId);
-
-		// 등록 아티템 생성 (아이템 생성매소드 사용)
-		Item item = ItemFactory.createItem(type, goal, detail, price);
 
 		// 등록 생성
 		Register register = Register.createRegister(member, item);
