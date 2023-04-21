@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
@@ -42,6 +44,32 @@ public class BucketController {
         List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
         return "buckets/bucketList";
+    }
 
+    @GetMapping("buckets/{itemId}/edit")
+    public String updateBucketForm(@PathVariable("itemId") Long itemId, Model model) {
+        ToDo bucket = (ToDo) itemService.findOne(itemId);
+
+        TodoForm form = new TodoForm();
+        form.setId(bucket.getId());
+        form.setGoal(bucket.getGoal());
+        form.setWay(bucket.getWay());
+        form.setTargetDate(bucket.getTargetDate());
+
+        model.addAttribute("form", form);
+        return "buckets/updateBucketForm";
+    }
+
+    @PostMapping("buckets/{itemId}/edit")
+    public String updateBucket(@PathVariable String itemId, @ModelAttribute("form") TodoForm form) {
+
+        ToDo toDo = new ToDo();
+        toDo.setId(form.getId());
+        toDo.setGoal(form.getGoal());
+        toDo.setWay(form.getWay());
+        toDo.setTargetDate(form.getTargetDate());
+
+        itemService.saveItem(toDo);
+        return "redirect:/buckets";
     }
 }
