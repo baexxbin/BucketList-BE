@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <form th:object="${form}" method="post">
+    <!-- id -->
+    <input type="hidden" th:field="*{id}" />
+    <div class="form-group">
+      <label th:for="goal">목표</label>
+      <input type="text" th:field="*{goal}" class="form-control"
+             placeholder="목표를 입력하세요" /> </div>
+    <div class="form-group">
+      <label th:for="way">방법</label>
+      <input type="text" th:field="*{way}" class="form-control" placeholder="방법을 입력하세요" />
+    </div>
+    <div class="form-group">
+      <label th:for="targetDate">목표일</label>
+      <input type="text" th:field="*{targetDate}" class="form-
+control" placeholder="목표일을 입력하세요" /> </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+</body>
+</html>
