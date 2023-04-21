@@ -2,6 +2,7 @@ package jpabucket.bucketlist.service;
 
 import java.util.List;
 
+import jpabucket.bucketlist.domain.item.ToDo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,18 @@ public class ItemService {
 	@Transactional
 	public void saveItem(Item item) {
 		itemRepository.save(item);
+	}
+
+//	@Transactional
+//	public Item updateItem(Long itemId, String goal, String way, String targetDate) {
+//		Item findItem = itemRepository.findOne(itemId);
+//		findItem.setGoal(goal);
+//	}
+
+	@Transactional
+	public void updateTodo(Long itemId, String goal, String way, String targetDate) {
+		ToDo findItem = (ToDo) itemRepository.findOne(itemId);
+		findItem.editTodo(goal, way, targetDate);
 	}
 
 	public List<Item> findItems() {

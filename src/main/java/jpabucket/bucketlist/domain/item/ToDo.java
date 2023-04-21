@@ -15,4 +15,10 @@ import lombok.Setter;
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ToDo extends Item {
 	private String way;
+
+	public void editTodo(String goal, String way, String targetDate) {
+		this.setGoal(goal);
+		this.setWay(way);
+		this.setTargetDate(targetDate);
+	}
 }

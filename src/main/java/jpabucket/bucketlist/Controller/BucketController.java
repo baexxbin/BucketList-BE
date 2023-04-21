@@ -61,15 +61,9 @@ public class BucketController {
     }
 
     @PostMapping("buckets/{itemId}/edit")
-    public String updateBucket(@PathVariable String itemId, @ModelAttribute("form") TodoForm form) {
+    public String updateBucket(@PathVariable Long itemId, @ModelAttribute("form") TodoForm form) {
 
-        ToDo toDo = new ToDo();
-        toDo.setId(form.getId());
-        toDo.setGoal(form.getGoal());
-        toDo.setWay(form.getWay());
-        toDo.setTargetDate(form.getTargetDate());
-
-        itemService.saveItem(toDo);
+        itemService.updateTodo(itemId, form.getGoal(), form.getWay(), form.getTargetDate());
         return "redirect:/buckets";
     }
 }
