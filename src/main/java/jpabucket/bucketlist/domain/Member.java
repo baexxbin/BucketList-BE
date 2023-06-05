@@ -25,7 +25,7 @@ public class Member {
 	private String name;
 
 	@Embedded
-	private Infomation infomation;
+	private Information information;
 
 	@OneToMany(mappedBy = "member")
 	private List<Register> registers = new ArrayList<>();

@@ -2,6 +2,7 @@ package jpabucket.bucketlist.domain.item;
 
 import static javax.persistence.FetchType.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,7 @@ public abstract class Item {
 
 	private String goal;
 	private int heart;
-
-	private LocalDateTime registerDate;
-	private String targetDate;
+	private LocalDate targetDate;
 
 	@OneToOne(mappedBy = "item", fetch = LAZY)
 	private Register register;

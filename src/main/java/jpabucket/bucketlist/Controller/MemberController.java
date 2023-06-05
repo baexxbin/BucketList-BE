@@ -1,6 +1,6 @@
 package jpabucket.bucketlist.Controller;
 
-import jpabucket.bucketlist.domain.Infomation;
+import jpabucket.bucketlist.domain.Information;
 import jpabucket.bucketlist.domain.Member;
 import jpabucket.bucketlist.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -25,22 +25,26 @@ public class MemberController {
         return "members/createMemberForm";
     }
 
-    @PostMapping("/members/new")
-    public String create(@Valid MemberForm form, BindingResult result) {
-
-        if (result.hasErrors()) {
-            return "members/createMemberForm";
-        }
-
-        Infomation infomation = new Infomation(form.getNickname(), form.getPassword(), form.getEmail());
-
-        Member member = new Member();
-        member.setName(form.getName());
-        member.setInfomation(infomation);
-
-        memberService.join(member);
-        return "redirect:/";
-    }
+//    @PostMapping("/members/new")
+//    public String create(@Valid MemberForm form, BindingResult result) {
+//
+//        if (result.hasErrors()) {
+//            return "members/createMemberForm";
+//        }
+//
+//        Information infomation = new Information();
+//        infomation.setPoint(0);
+//        infomation.setEmail(form.getEmail());
+//        infomation.getNickname(form.getNickname());
+//        infomation.setPassword(form.getPassword());
+//
+//        Member member = new Member();
+//        member.setName(form.getName());
+//        member.setInfomation(infomation);
+//
+//        memberService.join(member);
+//        return "redirect:/";
+//    }
 
 
     @GetMapping("/members")

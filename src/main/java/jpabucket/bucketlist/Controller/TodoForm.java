@@ -3,6 +3,7 @@ package jpabucket.bucketlist.Controller;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -12,7 +13,7 @@ public class TodoForm {
     private String goal;
     private int heart;
     private LocalDateTime registerDate;
-    private String targetDate;
+    private LocalDate targetDate;
 
     private String way;
 }

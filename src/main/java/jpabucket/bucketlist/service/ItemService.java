@@ -1,5 +1,7 @@
 package jpabucket.bucketlist.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jpabucket.bucketlist.domain.item.ToDo;
@@ -29,7 +31,7 @@ public class ItemService {
 //	}
 
 	@Transactional
-	public void updateTodo(Long itemId, String goal, String way, String targetDate) {
+	public void updateTodo(Long itemId, String goal, String way, LocalDate targetDate) {
 		ToDo findItem = (ToDo) itemRepository.findOne(itemId);
 		findItem.editTodo(goal, way, targetDate);
 	}

@@ -32,7 +32,6 @@ public class BucketController {
         toDo.setGoal(form.getGoal());
         toDo.setWay(form.getWay());
         toDo.setHeart(0);
-        toDo.setRegisterDate(LocalDateTime.now());
         toDo.setTargetDate(form.getTargetDate());
 
         itemService.saveItem(toDo);
