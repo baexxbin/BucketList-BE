@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabucket.bucketlist.domain.Category;
 import jpabucket.bucketlist.domain.Register;
 import lombok.AccessLevel;
@@ -41,6 +42,7 @@ public abstract class Item {
 	private int heart;
 	private LocalDate targetDate;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "item", fetch = LAZY)
 	private Register register;
 
