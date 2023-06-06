@@ -66,4 +66,15 @@ public class RegisterRepository {
 		TypedQuery<Register> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
 		return query.getResultList();
 	}
+
+	/**
+	 * Register 조회 시 한방 쿼리로 Member, item 한번에 다 가져오기
+	 */
+	public List<Register> findAllWithMemberItem() {
+		return em.createQuery(
+				"select r from Register r" +
+						" join fetch r.member m" +
+						" join fetch r.item i", Register.class
+		).getResultList();
+	}
 }
