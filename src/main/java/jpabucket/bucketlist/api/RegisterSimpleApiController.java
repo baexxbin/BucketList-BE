@@ -2,9 +2,9 @@ package jpabucket.bucketlist.api;
 
 
 import jpabucket.bucketlist.domain.Register;
-import jpabucket.bucketlist.domain.RegisteredStatus;
 import jpabucket.bucketlist.repository.RegisterRepository;
-import jpabucket.bucketlist.repository.RegisterSimpleQueryDto;
+import jpabucket.bucketlist.repository.register.simplequery.RegisterSimpleQueryDto;
+import jpabucket.bucketlist.repository.register.simplequery.RegisterSimpleQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 public class RegisterSimpleApiController {
 
     private final RegisterRepository registerRepository;
+    private final RegisterSimpleQueryRepository registerSimpleQueryRepository;
 
     @GetMapping("/api/v3/simple-orders")
     public List<SimpleRegisterDto> registerV3() {
@@ -38,7 +39,7 @@ public class RegisterSimpleApiController {
 
     @GetMapping("/api/v4/simple-orders")
     public List<RegisterSimpleQueryDto> registerV4() {
-        return registerRepository.findRegisterDtos();
+        return registerSimpleQueryRepository.findRegisterDtos();
     }
 
 

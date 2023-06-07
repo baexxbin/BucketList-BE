@@ -1,4 +1,4 @@
-package jpabucket.bucketlist.repository;
+package jpabucket.bucketlist.repository.register.simplequery;
 
 import jpabucket.bucketlist.domain.Register;
 import lombok.Data;

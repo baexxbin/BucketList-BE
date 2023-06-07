@@ -77,13 +77,4 @@ public class RegisterRepository {
 						" join fetch r.item i", Register.class
 		).getResultList();
 	}
-
-	public List<RegisterSimpleQueryDto> findRegisterDtos() {
-		return em.createQuery(
-				"select new jpabucket.bucketlist.repository.RegisterSimpleQueryDto(r.id, m.name, i.goal, i.targetDate)" +
-						" from Register r" +
-						" join r.member m" +
-						" join r.item i", RegisterSimpleQueryDto.class)
-				.getResultList();
-	}
 }
