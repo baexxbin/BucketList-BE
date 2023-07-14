@@ -28,7 +28,10 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
 
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
-    
+
+    // swagger를 위한 springdock 등록
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
