@@ -12,4 +12,9 @@ public class HelloApiController {
     public String helloWorld() {
         return "hello!";
     }
+
+    @GetMapping("/main")
+    public String getMainData() {
+        return "Main data from API";
+    }
 }
