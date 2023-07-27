@@ -45,10 +45,11 @@ public class RegisterService {
 //	}
 
 	@Transactional
-	public Long register(Long memberId, Item item) {
+	public Long register(Long memberId, Long itemId) {
 
 		// 엔티티 조회
 		Member member = memberRepository.findOne(memberId);
+		Item item = itemRepository.findOne(itemId);
 
 		// 등록 생성
 		Register register = Register.createRegister(member, item);
