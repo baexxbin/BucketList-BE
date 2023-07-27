@@ -23,9 +23,10 @@ public class BucketApiController {
     @Operation(summary = "버킷 생성", description = "Return BucketId")
     @PostMapping("/api/v1/create")
     public ResponseEntity<BucketResponseDto> create(@RequestBody @Valid BucketRequestDto requestDto) {
+        Long memberId = requestDto.getMemberId();
         ItemDto itemDto = requestDto.toServicItemDto();
         Long bucketId = itemService.createBucket(itemDto);
-        BucketResponseDto responseDto = new BucketResponseDto(bucketId);
+        BucketResponseDto responseDto = new BucketResponseDto(memberId ,bucketId);
         return ResponseEntity.ok(responseDto);
     }
 

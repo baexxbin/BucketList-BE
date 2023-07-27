@@ -2,6 +2,7 @@ package jpabucket.bucketlist.dto.bucket;
 
 import jpabucket.bucketlist.domain.item.ItemType;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
@@ -19,8 +20,9 @@ public class ItemDto {
         this.targetDate = targetDate;
     }
 
+    @Getter
     public static class TodoDto extends ItemDto {
-        private final String way;
+        private String way;
 
         public TodoDto(String goal, LocalDate targetDate, String way) {
             super(goal, targetDate);
@@ -29,6 +31,7 @@ public class ItemDto {
     }
 
 
+    @Getter
     public static class ToWantDto extends ItemDto {
         private String reason;
         private int price;
