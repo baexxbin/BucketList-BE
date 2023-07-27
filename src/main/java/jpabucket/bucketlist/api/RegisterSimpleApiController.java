@@ -8,12 +8,18 @@ import jpabucket.bucketlist.domain.item.Item;
 import jpabucket.bucketlist.domain.item.ItemType;
 import jpabucket.bucketlist.domain.item.ToDo;
 import jpabucket.bucketlist.domain.item.ToWant;
+import jpabucket.bucketlist.dto.bucket.BucketRequestDto;
+import jpabucket.bucketlist.dto.bucket.BucketResponseDto;
+import jpabucket.bucketlist.dto.register.RegisterResponseDto;
 import jpabucket.bucketlist.repository.RegisterRepository;
 import jpabucket.bucketlist.repository.register.simplequery.RegisterSimpleQueryDto;
 import jpabucket.bucketlist.repository.register.simplequery.RegisterSimpleQueryRepository;
+import jpabucket.bucketlist.service.ItemService;
 import jpabucket.bucketlist.service.RegisterService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +44,7 @@ public class RegisterSimpleApiController {
 
     private final RegisterRepository registerRepository;
     private final RegisterSimpleQueryRepository registerSimpleQueryRepository;
+    private final BucketApiController bucketApiController;
 
     private final RegisterService registerService;
 
@@ -58,24 +65,39 @@ public class RegisterSimpleApiController {
     }
 
 
-//        버킷리스트 등록
+    /**
+     *
+     * @param requestDto
+     * BucketResponseDto 수정해서(버킷객체 + 사용자id)  요청값으로 넣기
+     * @return registerId
+     */
     @Operation(summary = "버킷리스트 등록", description = "Return registerId")
     @PostMapping("/api/v1/register")
-    public CreateBucketResponse saveBucket(@RequestBody @Valid CreateBucketRequest request, Long memberId) {
-        Item item;
+    public ResponseEntity<RegisterResponseDto> register(@RequestBody @Valid BucketRequestDto requestDto) {
+        // 버킷 생성 API(bucketApiController) 호출
+        ResponseEntity<BucketResponseDto> bucketResponse = bucketApiController.create(requestDto);
 
-        if (request.itemType.equals(ItemType.DO)) {
-            item = ToDo.createToDo(request.getGoal(), request.getTargetDate(), request.getWay());
-        } else {
-            item = ToWant.createToWant(request.getGoal(), request.getTargetDate(), request.getReason(), request.getPrice());
+        if (bucketResponse.getStatusCode().is2xxSuccessful()) {
+            BucketResponseDto bucketResponseDto = bucketResponse.getBody();
+            Long memberId = bucketResponseDto.getMemberId();
+            Long bucketId = bucketResponseDto.getBucketId();
+
+            // 등록 프로세스 수행
+            Long registerId = registerService.register(memberId, bucketId);
+
+            // registerId 반환
+            RegisterResponseDto responseDto = new RegisterResponseDto(registerId);
+            return ResponseEntity.ok(responseDto);
         }
 
-        Long id = registerService.register(memberId, item);
-        return new CreateBucketResponse(id);
+        // 실패시 응답
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
     }
 
     @Data
-    static class CreateBucketRequest {
+    static class BucketCreateRequestDto {
+        private Long memberId;  // 등록인 id도 DTO에 같이 넣어줌
         private ItemType itemType;
         private String goal;
         private LocalDate targetDate;
