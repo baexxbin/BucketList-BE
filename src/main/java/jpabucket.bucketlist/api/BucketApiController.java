@@ -7,9 +7,7 @@ import jpabucket.bucketlist.dto.bucket.ItemDto;
 import jpabucket.bucketlist.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,5 +27,11 @@ public class BucketApiController {
         BucketResponseDto responseDto = new BucketResponseDto(memberId ,bucketId);
         return ResponseEntity.ok(responseDto);
     }
+//
+//    @Operation(summary = "좋아요 수 업데이트")
+//    @PatchMapping("/api/v1/bucket/{item_id}")
+//    public ResponseEntity<String> increaseHeart(@PathVariable("item_id") Long itemI d) {
+//
+//    }
 
 }

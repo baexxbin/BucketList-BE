@@ -39,7 +39,7 @@ public class Register {
 	private Item item;
 
 	private LocalDateTime registrationDate;
-	private LocalDateTime targetDate;
+
 
 	@Enumerated(EnumType.STRING)
 	private RegisteredStatus status;
