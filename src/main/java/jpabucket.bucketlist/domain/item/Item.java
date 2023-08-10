@@ -34,7 +34,7 @@ public abstract class Item {
 	private Long id;
 
 	private String goal;
-	private int heart;
+	private int heartCount;
 	private LocalDate targetDate;
 
 	@JsonIgnore
@@ -51,7 +51,14 @@ public abstract class Item {
 	/*
 	 * heart 증가
 	 */
-	public void addHeart(int quantity) {
-		this.heart += quantity;
+	public void addHeart() {
+		this.heartCount++;
+	}
+
+	/*
+	 * heart 감소
+	 */
+	public void decreaseHeart() {
+		this.heartCount--;
 	}
 }

@@ -11,4 +11,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface HeartRepository extends JpaRepository<Heart, Long> {
     Optional<Heart> findByMemberAndItem(Member member, Item item);
+
+    void deleteByMemberAndItem(Member member, Item item);
 }
