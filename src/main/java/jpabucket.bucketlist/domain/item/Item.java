@@ -5,20 +5,15 @@ import static javax.persistence.FetchType.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabucket.bucketlist.domain.Category;
+import jpabucket.bucketlist.domain.Heart;
 import jpabucket.bucketlist.domain.Register;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -48,6 +43,9 @@ public abstract class Item {
 
 	@ManyToMany(mappedBy = "items")
 	private List<Category> categories = new ArrayList<>();
+
+	@OneToMany(mappedBy = "items", cascade = CascadeType.ALL)
+	private Set<Heart> hearts = new HashSet<>();
 
 	//==비즈니스 로직==//
 	/*
