@@ -4,17 +4,21 @@ import jpabucket.bucketlist.domain.Heart;
 import jpabucket.bucketlist.domain.Member;
 import jpabucket.bucketlist.domain.item.Item;
 import jpabucket.bucketlist.dto.bucket.BaseBucketDto;
-import jpabucket.bucketlist.exceptions.CustomException;
+import jpabucket.bucketlist.exception.CustomException;
 import jpabucket.bucketlist.repository.HeartRepository;
 import jpabucket.bucketlist.repository.ItemRepository;
 import jpabucket.bucketlist.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.Optional;
 
+import static jpabucket.bucketlist.exception.ErrorCode.ALREADY_HEARTED;
+import static jpabucket.bucketlist.exception.ErrorCode.HEART_NOT_FOUND;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class HeartService {
@@ -25,7 +29,7 @@ public class HeartService {
 
 
     @Transactional
-    public void pressHeart(BaseBucketDto baseBucketDto) throws IOException {
+    public void pressHeart(BaseBucketDto baseBucketDto) {
         Long memberId = baseBucketDto.getMemberId();
         Long itemId = baseBucketDto.getBucketId();
 
@@ -35,7 +39,7 @@ public class HeartService {
         Optional<Heart> heartOptional = heartRepository.findByMemberAndItem(member, item);
 
         if (heartOptional.isPresent()) {    // 이미 하트를 누른 경우
-            throw new CustomException("ALREADY_HEARTED");
+            throw new CustomException(ALREADY_HEARTED);
         }
 
         Heart heart = Heart.createHeart(member, item);
@@ -44,7 +48,7 @@ public class HeartService {
     }
 
     @Transactional
-    public void unPressHeart(BaseBucketDto baseBucketDto) throws IOException {
+    public void unPressHeart(BaseBucketDto baseBucketDto) {
 
         Long memberId = baseBucketDto.getMemberId();
         Long itemId = baseBucketDto.getBucketId();
@@ -55,7 +59,7 @@ public class HeartService {
         Optional<Heart> heartOptional = heartRepository.findByMemberAndItem(member, item);
 
         if (heartOptional.isEmpty()) {
-            throw new CustomException("HEART_NOT_FOUND");
+            throw new CustomException(HEART_NOT_FOUND);
         }
 
         heartRepository.deleteByMemberAndItem(member, item);
