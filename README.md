@@ -35,6 +35,11 @@
 
 <br>
 
+**🌼 DB 설계**
+- [Register 엔티티 작성](https://velog.io/@bbiniroo/Spring-등록-엔티티-개발): `매핑 테이블`로 N:M관계 풀어내기
+
+<br>
+
 **❄️ TDD, 테스트코드 작성하기**
 - [회원기능 테스트](https://velog.io/@bbiniroo/Spring-회원기능-테스트): 테스트 코드의 기본 어노테이션 익히기
 
